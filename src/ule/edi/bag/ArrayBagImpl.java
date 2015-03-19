@@ -104,8 +104,12 @@ public class ArrayBagImpl<T> implements Bag<T> {
 
 	@Override
 	public long size() {
-		// TODO Auto-generated method stub
-		return arraySize;
+		int count = 0;
+		for(int i=0; i<elementCount; i++) {
+			count += arrayCounters[i];
+		}
+		
+		return count;
 	}
 
 	@Override
