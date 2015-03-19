@@ -134,7 +134,13 @@ public class ArrayBagImpl<T> implements Bag<T> {
 		
 		buffer.append("(");
 
-		// TODO Ir añadiendo en buffer las cadenas para la representación de esta bolsa
+		for(int i=0; i<elementCount; i++) {
+			buffer.append("\"");
+			buffer.append(array[i]);
+			buffer.append("\"(x");
+			buffer.append(arrayCounters[i]);
+			buffer.append("), ");
+		}
 		
 		buffer.append(")");
 		
