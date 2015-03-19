@@ -1,0 +1,108 @@
+package ule.edi.bag;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import ule.edi.EmptyCollectionException;
+
+public class ArrayBagImpl<T> implements Bag<T> {
+	
+	private final int RESERVATION_SIZE = 5;
+	private T[] array = null;
+	private int arraySize = 0;
+	private int elementCount = 0;
+	
+	private void reserveMemory() {
+		if(arraySize <= elementCount) {
+			// no se pueden crear arrays de objetos sin tipo de ahi esto
+			T[] tmp = (T[]) new Object[arraySize + RESERVATION_SIZE];
+			arraySize += RESERVATION_SIZE;
+			System.arraycopy(array, 0, tmp, 0, elementCount);
+			array = tmp;
+			for(int i=elementCount; i<arraySize; i++) {
+				array[i] = null;
+			}
+		}
+	}
+	
+	public ArrayBagImpl() {
+		
+	}
+
+	@Override
+	public void add(T element, int times) {
+		// TODO Auto-generated method stub
+		reserveMemory();
+	}
+
+	@Override
+	public void add(T element) {
+		// TODO Auto-generated method stub
+		reserveMemory();
+	}
+
+	@Override
+	public void remove(T element, int times) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(T element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean contains(T element) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public long size() {
+		// TODO Auto-generated method stub
+		return arraySize;
+	}
+
+	@Override
+	public int count(T element) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public String toString() {
+		
+		final StringBuffer buffer = new StringBuffer();
+		
+		buffer.append("(");
+
+		// TODO Ir añadiendo en buffer las cadenas para la representación de esta bolsa
+		
+		buffer.append(")");
+		
+		return buffer.toString();
+	}
+	public static void main(String[] args) {
+		ArrayBagImpl<Integer> a = new ArrayBagImpl<Integer>();
+	}
+}
