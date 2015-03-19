@@ -9,6 +9,7 @@ public class ArrayBagImpl<T> implements Bag<T> {
 	
 	private final int RESERVATION_SIZE = 5;
 	private T[] array = null;
+	private int[] arrayCounters = null;
 	private int arraySize = 0;
 	private int elementCount = 0;
 	
@@ -22,7 +23,25 @@ public class ArrayBagImpl<T> implements Bag<T> {
 			for(int i=elementCount; i<arraySize; i++) {
 				array[i] = null;
 			}
+			// TODO : evitar   doble bucle
+			int[] tmpC = new int[arraySize];
+			System.arraycopy(arrayCounters, 0, tmpC, 0, elementCount);
+			arrayCounters = tmpC;
+			for(int i=elementCount; i<arraySize; i++) {
+				arrayCounters[i] = 0;
+			}
+			
 		}
+	}
+	
+	private int findPositionOf(T element) {
+		for(int i=0;i<elementCount; i++) {
+			if(array[i].equals(element)) {
+				return i;
+			}
+		}
+		
+		return -1;
 	}
 	
 	public ArrayBagImpl() {
@@ -33,12 +52,20 @@ public class ArrayBagImpl<T> implements Bag<T> {
 	public void add(T element, int times) {
 		// TODO Auto-generated method stub
 		reserveMemory();
+		int pos = findPositionOf(element);
+		if(pos > -1) {
+			arrayCounters[pos] += times;
+		} else {
+			array[elementCount] = element;
+			arrayCounters[elementCount] += times;
+		}
+		
 	}
 
 	@Override
 	public void add(T element) {
 		// TODO Auto-generated method stub
-		reserveMemory();
+		this.add(element,1);
 	}
 
 	@Override
@@ -62,7 +89,8 @@ public class ArrayBagImpl<T> implements Bag<T> {
 	@Override
 	public boolean contains(T element) {
 		// TODO Auto-generated method stub
-		return false;
+		
+		return findPositionOf(element) != -1;
 	}
 
 	@Override
