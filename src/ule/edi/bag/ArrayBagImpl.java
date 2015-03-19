@@ -114,7 +114,10 @@ public class ArrayBagImpl<T> implements Bag<T> {
 
 	@Override
 	public int count(T element) {
-		// TODO Auto-generated method stub
+		int pos = findPositionOf(element);
+		if(pos > -1) {
+			return arrayCounters[pos];
+		}
 		return 0;
 	}
 
