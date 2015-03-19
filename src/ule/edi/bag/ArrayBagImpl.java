@@ -82,8 +82,11 @@ public class ArrayBagImpl<T> implements Bag<T> {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		// lo hago asi para no perder la memoria reservada
+		for(int i=0;i<arraySize;i++) {
+			array[i] = null;
+			arrayCounters[i] = 0;
+		}
 	}
 
 	@Override
