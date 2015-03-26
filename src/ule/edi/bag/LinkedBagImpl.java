@@ -89,14 +89,19 @@ public class LinkedBagImpl<T> implements Bag<T> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return list == null;
 	}
 
 	@Override
 	public long size() {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		Node r = list;
+		while(r != null) {
+			result += r.counter;
+			r = r.next;
+		}
+		return result;
 	}
 
 	@Override
