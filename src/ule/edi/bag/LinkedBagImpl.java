@@ -62,16 +62,33 @@ public class LinkedBagImpl<T> implements Bag<T> {
 	public void add(T element) {
 		add(element,1);	
 	}
+	
+	private Node findPreviousNode(Node n) {
+		Node r = list;
+		Node p = null;
+		while(r != null && r.next != n) {
+			p = r;
+			r = r.next;
+		}
+		return p;
+	}
 
 	@Override
 	public void remove(T element, int times) {
-		// TODO Auto-generated method stub
+		Node r = findNode(element);
+		if(r != null) {
+			r.counter -= times;
+			if(r.counter <= 0) {
+				Node aux = findPreviousNode(r);
+				aux.next = r.next;
+			}
+		}
 		
 	}
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
+		remove(element, 1);
 		
 	}
 
