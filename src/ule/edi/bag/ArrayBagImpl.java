@@ -71,12 +71,26 @@ public class ArrayBagImpl<T> implements Bag<T> {
 	@Override
 	public void remove(T element, int times) {
 		// TODO Auto-generated method stub
-		
+		int position = findPositionOf(element);
+		if(position >= 0) {
+			arrayCounters[position] -= times;
+			if(arrayCounters[position] <= 0) {
+				array[position] = null;
+				arrayCounters[position] = 0;
+				elementCount--;
+				for(int i=position; i<arraySize-1; i++) {
+					array[i] = array[i+1];
+					arrayCounters[i] = arrayCounters[i+1];
+				}
+				array[arraySize-1] = null;
+				arrayCounters[arraySize-1] = 0;
+			}
+		}
 	}
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
+		remove(element,1);
 		
 	}
 
