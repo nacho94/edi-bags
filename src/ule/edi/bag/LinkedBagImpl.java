@@ -110,11 +110,27 @@ public class LinkedBagImpl<T> implements Bag<T> {
 		Node a = findNode(element);
 		return a == null ? 0 : a.counter;
 	}
+	
+	private class LinkedBagIterator implements Iterator<T> {
+		private Node r = list;
+		public boolean hasNext(){	
+			return r != null && r.next != null;
+		}
+		
+		public T next() throws NoSuchElementException {
+			if(!hasNext()) {
+				throw new NoSuchElementException();
+			}
+			Node aux = r;
+			r = r.next;
+			return aux.obj;	
+		}
+	};
 
 	@Override
 	public Iterator<T> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new LinkedBagIterator();
 	}
 	
 	@Override
