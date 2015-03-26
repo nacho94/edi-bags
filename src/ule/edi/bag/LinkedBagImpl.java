@@ -83,8 +83,8 @@ public class LinkedBagImpl<T> implements Bag<T> {
 
 	@Override
 	public boolean contains(T element) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return findNode(element) != null;
 	}
 
 	@Override
