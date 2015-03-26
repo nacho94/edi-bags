@@ -134,11 +134,26 @@ public class ArrayBagImpl<T> implements Bag<T> {
 		}
 		return 0;
 	}
+	
+	private class ArrayBagIterator implements Iterator<T> {
+		private int position = 0;
+		
+		public boolean hasNext(){	
+			return position < elementCount;
+		}
+		
+		public T next() throws NoSuchElementException {
+			if(!hasNext()) {
+				throw new NoSuchElementException();
+			}
+			return array[position++];
+		}
+	};
 
 	@Override
 	public Iterator<T> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		 
+		return new ArrayBagIterator();
 	}
 	
 	@Override
