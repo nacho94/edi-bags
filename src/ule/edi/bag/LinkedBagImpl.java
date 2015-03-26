@@ -106,8 +106,8 @@ public class LinkedBagImpl<T> implements Bag<T> {
 
 	@Override
 	public int count(T element) {
-		// TODO Auto-generated method stub
-		return 0;
+		Node a = findNode(element);
+		return a == null ? 0 : a.counter;
 	}
 
 	@Override
