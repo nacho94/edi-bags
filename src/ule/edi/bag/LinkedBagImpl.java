@@ -77,7 +77,8 @@ public class LinkedBagImpl<T> implements Bag<T> {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
+		list = null;
+		elementCount = 0;
 		
 	}
 
