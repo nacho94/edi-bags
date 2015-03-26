@@ -6,21 +6,61 @@ import java.util.NoSuchElementException;
 import ule.edi.EmptyCollectionException;
 
 public class LinkedBagImpl<T> implements Bag<T> {
-
+	
+	private class Node {
+		public T obj = null;
+		public int counter = 0;
+		public Node next = null;
+		
+		public Node(T element , int times) {
+			obj = element;
+			counter = times;
+		}
+	}
+	
+	int elementCount = 0;
+	Node list = null;
+	
 	public LinkedBagImpl() {
 		
 	}
 	
-	@Override
+	private Node getLastNode() {
+		Node r = list;
+		while(r.next != null) {
+			r = r.next;
+		}
+		return r;
+	}
+	
+	private Node findNode(T element) {
+		Node r = list;
+		while(r != null && !r.obj.equals(element)) {
+			r = r.next;
+		}
+		return r;
+	}
+	
+ 	@Override
 	public void add(T element, int times) {
-		// TODO Auto-generated method stub
-		
+		if(list == null) {
+			list = new Node(element,times);
+			elementCount++;
+		} else {
+			Node aux = findNode(element);
+			if(aux != null) {
+				aux.counter += times;
+			} else {
+				Node last = getLastNode();
+				last.next = new Node(element,times);
+				elementCount++;
+			}
+		}
 	}
 
 	@Override
 	public void add(T element) {
-		// TODO Auto-generated method stub
-		
+		add(element,1);	
 	}
 
 	@Override
