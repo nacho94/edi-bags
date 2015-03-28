@@ -43,6 +43,12 @@ public class LinkedBagImpl<T> implements Bag<T> {
 	
  	@Override
 	public void add(T element, int times) {
+ 		if(element == null) {
+			throw new NullPointerException();	
+		}
+		if(times < 0) {
+			throw new IllegalArgumentException();
+		}
 		if(list == null) {
 			list = new Node(element,times);
 			elementCount++;
@@ -60,6 +66,9 @@ public class LinkedBagImpl<T> implements Bag<T> {
 
 	@Override
 	public void add(T element) {
+		if(element == null) {
+			throw new NullPointerException();	
+		}
 		add(element,1);	
 	}
 	
@@ -75,6 +84,12 @@ public class LinkedBagImpl<T> implements Bag<T> {
 
 	@Override
 	public void remove(T element, int times) {
+		if(element == null) {
+			throw new NullPointerException();	
+		}
+		if(times < 0) {
+			throw new IllegalArgumentException();
+		}
 		Node r = findNode(element);
 		if(r != null) {
 			r.counter -= times;
@@ -88,6 +103,9 @@ public class LinkedBagImpl<T> implements Bag<T> {
 
 	@Override
 	public void remove(T element) {
+		if(element == null) {
+			throw new NullPointerException();	
+		}
 		remove(element, 1);
 		
 	}
@@ -101,7 +119,9 @@ public class LinkedBagImpl<T> implements Bag<T> {
 
 	@Override
 	public boolean contains(T element) {
-		
+		if(element == null) {
+			throw new NullPointerException();	
+		}
 		return findNode(element) != null;
 	}
 
@@ -124,6 +144,9 @@ public class LinkedBagImpl<T> implements Bag<T> {
 
 	@Override
 	public int count(T element) {
+		if(element == null) {
+			throw new NullPointerException();	
+		}
 		Node a = findNode(element);
 		return a == null ? 0 : a.counter;
 	}
@@ -142,6 +165,9 @@ public class LinkedBagImpl<T> implements Bag<T> {
 			r = r.next;
 			return aux.obj;	
 		}
+		public void remove() throws UnsupportedOperationException {
+			throw new UnsupportedOperationException();
+		}
 	};
 
 	@Override
@@ -156,12 +182,39 @@ public class LinkedBagImpl<T> implements Bag<T> {
 		final StringBuffer buffer = new StringBuffer();
 		
 		buffer.append("(");
+		
+		Node r = list;
+		while(r != null) {
+			buffer.append("\"");
+			buffer.append(r.obj);
+			buffer.append("\"(x");
+			buffer.append(r.counter);
+			if(r.next == null) {
+				buffer.append(")");
+			} else {
+				buffer.append("), ");
+			}
+			
+			r = r.next;
+		}
 
 		// TODO Ir añadiendo en buffer las cadenas para la representación de esta bolsa
 		
 		buffer.append(")");
 		
 		return buffer.toString();
+	}
+	public static void main(String[] args) {
+		LinkedBagImpl<String> a = new LinkedBagImpl<String>();
+		
+		a.add("abc", 8);
+		a.add("AFR",3);
+		System.out.println(a.isEmpty());
+		System.out.println(a.contains("AFR"));
+		System.out.println(a.size());
+		System.out.println(a.count("abc"));
+		a.remove("AFR", 2);
+		System.out.print(a.toString());
 	}
 
 }

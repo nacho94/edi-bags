@@ -16,6 +16,7 @@ public class ArrayBagImpl<T> implements Bag<T> {
 	private void reserveMemory() {
 		if(arraySize <= elementCount) {
 			// no se pueden crear arrays de objetos sin tipo de ahi esto
+			@SuppressWarnings("unchecked")
 			T[] tmp = (T[]) new Object[arraySize + RESERVATION_SIZE];
 			arraySize += RESERVATION_SIZE;
 			System.arraycopy(array, 0, tmp, 0, elementCount);
@@ -51,6 +52,12 @@ public class ArrayBagImpl<T> implements Bag<T> {
 	@Override
 	public void add(T element, int times) {
 		// TODO Auto-generated method stub
+		if(element == null) {
+			throw new NullPointerException();	
+		}
+		if(times < 0) {
+			throw new IllegalArgumentException();
+		}
 		reserveMemory();
 		int pos = findPositionOf(element);
 		if(pos > -1) {
@@ -64,13 +71,20 @@ public class ArrayBagImpl<T> implements Bag<T> {
 
 	@Override
 	public void add(T element) {
-		// TODO Auto-generated method stub
+		if(element == null) {
+			throw new NullPointerException();
+		}
 		this.add(element,1);
 	}
 
 	@Override
 	public void remove(T element, int times) {
-		// TODO Auto-generated method stub
+		if(element == null) {
+			throw new NullPointerException();	
+		}
+		if(times < 0) {
+			throw new IllegalArgumentException();
+		}
 		int position = findPositionOf(element);
 		if(position >= 0) {
 			arrayCounters[position] -= times;
@@ -90,6 +104,9 @@ public class ArrayBagImpl<T> implements Bag<T> {
 
 	@Override
 	public void remove(T element) {
+		if(element == null) {
+			throw new NullPointerException();
+		}
 		remove(element,1);
 		
 	}
@@ -105,8 +122,9 @@ public class ArrayBagImpl<T> implements Bag<T> {
 
 	@Override
 	public boolean contains(T element) {
-		// TODO Auto-generated method stub
-		
+		if(element == null) {
+			throw new NullPointerException();
+		}
 		return findPositionOf(element) != -1;
 	}
 
@@ -128,6 +146,9 @@ public class ArrayBagImpl<T> implements Bag<T> {
 
 	@Override
 	public int count(T element) {
+		if(element == null) {
+			throw new NullPointerException();
+		}
 		int pos = findPositionOf(element);
 		if(pos > -1) {
 			return arrayCounters[pos];
@@ -147,6 +168,10 @@ public class ArrayBagImpl<T> implements Bag<T> {
 				throw new NoSuchElementException();
 			}
 			return array[position++];
+		}
+		
+		public void remove() throws UnsupportedOperationException {
+			throw new UnsupportedOperationException();
 		}
 	};
 
@@ -177,5 +202,6 @@ public class ArrayBagImpl<T> implements Bag<T> {
 	}
 	public static void main(String[] args) {
 		ArrayBagImpl<Integer> a = new ArrayBagImpl<Integer>();
+
 	}
 }
