@@ -24,7 +24,8 @@ public class LinkedBagImplTests  {
 	
 	@Test(expected = NullPointerException.class)
 	public void testNullCheckOnAdd() {
-//		S1.add(null);
+		LinkedBagImpl<String> S1 = new LinkedBagImpl<String>();
+	S1.add(null);
 	}
 	
 }

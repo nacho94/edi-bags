@@ -65,6 +65,7 @@ public class ArrayBagImpl<T> implements Bag<T> {
 		} else {
 			array[elementCount] = element;
 			arrayCounters[elementCount] += times;
+			elementCount++;
 		}
 		
 	}
@@ -200,8 +201,8 @@ public class ArrayBagImpl<T> implements Bag<T> {
 		
 		return buffer.toString();
 	}
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		ArrayBagImpl<Integer> a = new ArrayBagImpl<Integer>();
-
-	}
+		a.add(123);
+	}*/
 }
