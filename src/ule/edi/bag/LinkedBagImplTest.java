@@ -63,6 +63,15 @@ public class LinkedBagImplTest {
 		a.remove("av",2);
 		Assert.assertEquals(3, a.count("av"));
 	}
+	@Test
+	public void testRemoveTInt2() {
+		a.add("abc", 8);
+		a.add("AFR",3);
+		a.add("we",5);
+		a.add("r");
+		a.remove("we", 8);
+		Assert.assertEquals("(\"abc\"(x8), \"AFR\"(x3), \"r\"(x1))", a.toString());
+	}
 	
 	@Test
 	public void testRemoveT() {

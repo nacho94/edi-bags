@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import ule.edi.bag.ArrayBagImpl;
 import ule.edi.bag.Bag;
+import ule.edi.bag.LinkedBagImpl;
 import ule.edi.currency.Euro.Denomination;
 
 public class EuroCurrencyTests {
@@ -26,7 +27,7 @@ public class EuroCurrencyTests {
 	public void testBagOfEuros() {
 		
 		//	Crea una bolsa con elementos del tipo adecuado
-		Bag<Euro.Denomination> B = new ArrayBagImpl<Euro.Denomination>();
+		Bag<Euro.Denomination> B = new LinkedBagImpl<Euro.Denomination>();
 		
 		//	Añade contenido a la bolsa
 		B.add(Euro.FIVE_HUNDRED_EUROS, 4);

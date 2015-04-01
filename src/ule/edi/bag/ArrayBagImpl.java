@@ -11,7 +11,7 @@ public class ArrayBagImpl<T> implements Bag<T> {
 	private T[] array = null;
 	private int[] arrayCounters = null;
 	private int arraySize = 0;
-	private int elementCount = 0;
+	private static int elementCount = 0;
 	
 	private void reserveMemory() {
 		if(arraySize <= elementCount) {
@@ -46,7 +46,9 @@ public class ArrayBagImpl<T> implements Bag<T> {
 	}
 	
 	public ArrayBagImpl() {
-		
+		array = (T[]) new Object[arraySize + RESERVATION_SIZE];
+		arraySize += RESERVATION_SIZE;
+		arrayCounters = new int[arraySize];
 	}
 
 	@Override
@@ -66,6 +68,7 @@ public class ArrayBagImpl<T> implements Bag<T> {
 			array[elementCount] = element;
 			arrayCounters[elementCount] += times;
 			elementCount++;
+			
 		}
 		
 	}
@@ -204,5 +207,12 @@ public class ArrayBagImpl<T> implements Bag<T> {
 	/*public static void main(String[] args) {
 		ArrayBagImpl<Integer> a = new ArrayBagImpl<Integer>();
 		a.add(123);
+		a.add(34,8);
+		a.add(90,5);
+		a.add(97,4);
+		a.add(647);
+		a.add(912,3);
+		a.remove(647,9);
+		System.out.print(a.toString());
 	}*/
 }
