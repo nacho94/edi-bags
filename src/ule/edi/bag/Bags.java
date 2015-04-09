@@ -71,7 +71,8 @@ public abstract class Bags {
 	}
 	
 	private static <T> boolean compare(Bag<T> B1, Bag<T> B2) {
-		if(B1.size() != B2.size()) {
+		
+		if(B1 == null || B2 == null || B1.size() != B2.size()) {
 			return false;
 		}
 		try{
