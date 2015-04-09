@@ -74,9 +74,6 @@ public class ArrayBagImpl<T> implements Bag<T> {
 
 	@Override
 	public void add(T element) {
-		if(element == null) {
-			throw new NullPointerException();
-		}
 		this.add(element,1);
 	}
 
