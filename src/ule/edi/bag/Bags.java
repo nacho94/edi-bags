@@ -120,8 +120,15 @@ public abstract class Bags {
 	 * @return
 	 */
 	public static <T> Bag<T> union(Bag<T> B1, Bag<T> B2) {
+		// de que tipo creamos la nueva bolsa?
+		Iterator <T> it2 = B2.iterator();
 		
-		return null;
+		while(it2.hasNext()) {
+			T e = it2.next();
+			B1.add(e,B2.count(e));
+		}
+		
+		return B1;
 	}
 	
 	/**
