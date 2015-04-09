@@ -150,7 +150,14 @@ public abstract class Bags {
 	 */
 	public static <T> Bag<T> complement(Bag<T> A, Bag<T> B) {
 		
-		return null;
+		Iterator <T> it2 = B.iterator();
+		
+		while(it2.hasNext()) {
+			T e = it2.next();
+			A.remove(e,B.count(e));
+		}
+		
+		return A;
 	}
 	
 }
