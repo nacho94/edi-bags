@@ -30,7 +30,8 @@ public class ArrayBagImplTests{
 	
 	@Test(expected = NullPointerException.class)
 	public void testNullCheckOnAdd() {
-//		S1.add(null);
+		ArrayBagImpl<String> S1= new ArrayBagImpl<String>();
+	S1.add(null);
 	}
 		
 }
