@@ -1,5 +1,6 @@
 package ule.edi.bag;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -11,23 +12,19 @@ public class ArrayBagImpl<T> implements Bag<T> {
 	private T[] array = null;
 	private int[] arrayCounters = null;
 	private int arraySize = 0;
-	private static int elementCount = 0;
+	private int elementCount = 0;
 	
 	private void reserveMemory() {
 		if(arraySize <= elementCount) {
 			// no se pueden crear arrays de objetos sin tipo de ahi esto
-			@SuppressWarnings("unchecked")
-			T[] tmp = (T[]) new Object[arraySize + RESERVATION_SIZE];
+			
+			array = Arrays.copyOf(array, arraySize + RESERVATION_SIZE);
 			arraySize += RESERVATION_SIZE;
-			System.arraycopy(array, 0, tmp, 0, elementCount);
-			array = tmp;
 			for(int i=elementCount; i<arraySize; i++) {
 				array[i] = null;
 			}
 			// TODO : evitar   doble bucle
-			int[] tmpC = new int[arraySize];
-			System.arraycopy(arrayCounters, 0, tmpC, 0, elementCount);
-			arrayCounters = tmpC;
+			arrayCounters = Arrays.copyOf(arrayCounters, arraySize + RESERVATION_SIZE);
 			for(int i=elementCount; i<arraySize; i++) {
 				arrayCounters[i] = 0;
 			}
@@ -42,12 +39,13 @@ public class ArrayBagImpl<T> implements Bag<T> {
 			}
 		}
 		
+		
 		return -1;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public ArrayBagImpl() {
-		array = (T[]) new Object[arraySize + RESERVATION_SIZE];
-		arraySize += RESERVATION_SIZE;
+		array = (T[]) new Object[arraySize];
 		arrayCounters = new int[arraySize];
 	}
 
@@ -65,6 +63,7 @@ public class ArrayBagImpl<T> implements Bag<T> {
 		if(pos > -1) {
 			arrayCounters[pos] += times;
 		} else {
+			
 			array[elementCount] = element;
 			arrayCounters[elementCount] += times;
 			elementCount++;
@@ -197,7 +196,12 @@ public class ArrayBagImpl<T> implements Bag<T> {
 			buffer.append(array[i]);
 			buffer.append("\"(x");
 			buffer.append(arrayCounters[i]);
-			buffer.append("), ");
+			if(i == elementCount-1) {
+				buffer.append(")");
+			} else {
+				buffer.append("), ");
+			}
+			
 		}
 		
 		buffer.append(")");
@@ -205,14 +209,9 @@ public class ArrayBagImpl<T> implements Bag<T> {
 		return buffer.toString();
 	}
 	/*public static void main(String[] args) {
-		ArrayBagImpl<Integer> a = new ArrayBagImpl<Integer>();
-		a.add(123);
-		a.add(34,8);
-		a.add(90,5);
-		a.add(97,4);
-		a.add(647);
-		a.add(912,3);
-		a.remove(647,9);
-		System.out.print(a.toString());
+		ArrayBagImpl<String> a = new ArrayBagImpl<String>();
+		a.add("be",8);
+		a.add("w", 3);
+		
 	}*/
 }

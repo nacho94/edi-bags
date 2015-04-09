@@ -2,6 +2,9 @@ package ule.edi.bag;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -79,6 +82,11 @@ public class ArrayBagImplTest {
 		Assert.assertEquals(4, a.count("av"));
 	}
 	
+	@Test
+	public void testRemoveTEmpty() {
+		a.remove("av");
+	}
+	
 	@Test(expected=NullPointerException.class)
 	public void testRemoveTException() {
 		a.remove(null);
@@ -86,6 +94,7 @@ public class ArrayBagImplTest {
 	}
 	@Test
 	public void testClear() {
+		a.add("av",5);
 		a.clear();
 	}
 
@@ -141,9 +150,32 @@ public class ArrayBagImplTest {
 
 	@Test
 	public void testIterator() {
-		a.iterator();
+		a.add("abc", 8);
+		a.add("AFR",3);
+		Iterator<String> it = a.iterator();
+		while(it.hasNext()) {
+			it.next();
+		}
+		
 	}
-
+	
+	@Test(expected=NoSuchElementException.class)
+	public void testIteratorException() {
+		a.add("abc", 8);
+		a.add("AFR",3);
+		Iterator<String> it = a.iterator();
+		while(true) {
+			it.next();
+		}
+		
+	}
+	
+	@Test(expected=UnsupportedOperationException.class)
+	public void testIteratorException2() {
+		Iterator<String> it = a.iterator();
+		it.remove();
+	}
+		
 	@Test
 	public void testToString() {
 		a.add("abc", 8);

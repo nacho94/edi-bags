@@ -95,8 +95,14 @@ public class LinkedBagImpl<T> implements Bag<T> {
 		if(r != null) {
 			r.counter -= times;
 			if(r.counter <= 0) {
-				Node aux = findPreviousNode(r);
-				aux.next = r.next;	
+				if(element == list.obj) {
+					list = list.next; 
+					
+				}else {
+					Node aux = findPreviousNode(r);
+					aux.next = r.next;	
+				}
+				
 			}
 		}
 		
@@ -217,7 +223,7 @@ public class LinkedBagImpl<T> implements Bag<T> {
 		System.out.println(a.count("abc"));
 		a.add("we",5);
 		a.add("r");
-		a.remove("we", 8);
+		a.remove("abc", 9);
 		System.out.print(a.toString());
 	} 
 
