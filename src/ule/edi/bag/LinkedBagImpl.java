@@ -161,7 +161,7 @@ public class LinkedBagImpl<T> implements Bag<T> {
 	private class LinkedBagIterator implements Iterator<T> {
 		private Node r = list;
 		public boolean hasNext(){	
-			return r != null && r.next != null;
+			return r != null;
 		}
 		
 		public T next() throws NoSuchElementException {
