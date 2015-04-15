@@ -205,10 +205,4 @@ public class ArrayBagImpl<T> implements Bag<T> {
 		
 		return buffer.toString();
 	}
-	/*public static void main(String[] args) {
-		ArrayBagImpl<String> a = new ArrayBagImpl<String>();
-		a.add("be",8);
-		a.add("w", 3);
-		
-	}*/
 }

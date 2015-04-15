@@ -211,20 +211,5 @@ public class LinkedBagImpl<T> implements Bag<T> {
 		
 		return buffer.toString();
 	}
-	
-/*	public static void main(String[] args) {
-		LinkedBagImpl<String> a = new LinkedBagImpl<String>();
-		
-		a.add("abc", 8);
-		a.add("AFR",3);
-		System.out.println(a.isEmpty());
-		System.out.println(a.contains("AFR"));
-		System.out.println(a.size());
-		System.out.println(a.count("abc"));
-		a.add("we",5);
-		a.add("r");
-		a.remove("abc", 9);
-		System.out.print(a.toString());
-	} */
 
 }
