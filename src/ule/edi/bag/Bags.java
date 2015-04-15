@@ -75,7 +75,7 @@ public abstract class Bags {
 		if(B1 == null || B2 == null || B1.size() != B2.size()) {
 			return false;
 		}
-		try{
+	
 			Iterator <T> it1 = B1.iterator();
 
 			while(it1.hasNext()) {
@@ -85,19 +85,6 @@ public abstract class Bags {
 				}
 			}
 			
-			Iterator <T> it2 = B2.iterator();
-			
-			while(it2.hasNext()) {
-				T e = it2.next();
-				if(!B1.contains(e) || (B1.count(e) != B2.count(e))) {
-					return false;
-				}
-			}
-			
-		}catch(Exception e) {
-			return false;
-		}
-		
 		return true;
 	}
 	/**

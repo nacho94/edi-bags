@@ -212,7 +212,7 @@ public class LinkedBagImpl<T> implements Bag<T> {
 		return buffer.toString();
 	}
 	
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		LinkedBagImpl<String> a = new LinkedBagImpl<String>();
 		
 		a.add("abc", 8);
@@ -225,6 +225,6 @@ public class LinkedBagImpl<T> implements Bag<T> {
 		a.add("r");
 		a.remove("abc", 9);
 		System.out.print(a.toString());
-	} 
+	} */
 
 }

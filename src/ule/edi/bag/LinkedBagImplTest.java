@@ -2,6 +2,9 @@ package ule.edi.bag;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -62,9 +65,15 @@ public class LinkedBagImplTest {
 		a.add("av",5);
 		a.remove("av",2);
 		Assert.assertEquals(3, a.count("av"));
+	}@Test
+	public void testRemoveTInt2() {
+		a.add("av",5);
+		a.add("AFR",3);
+		a.remove("av",6);
+		
 	}
 	@Test
-	public void testRemoveTInt2() {
+	public void testRemoveTInt3() {
 		a.add("abc", 8);
 		a.add("AFR",3);
 		a.add("we",5);
@@ -78,6 +87,16 @@ public class LinkedBagImplTest {
 		a.add("av",5);
 		a.remove("av");
 		Assert.assertEquals(4, a.count("av"));
+	}
+	
+	@Test
+	public void testRemove2() {
+		a.remove("av");
+	}
+	
+	@Test
+	public void testRemove3() {
+		a.remove("av");
 	}
 	
 	@Test(expected=NullPointerException.class)
@@ -142,7 +161,30 @@ public class LinkedBagImplTest {
 
 	@Test
 	public void testIterator() {
-		a.iterator();
+		a.add("abc", 8);
+		a.add("AFR",3);
+		Iterator<String> it = a.iterator();
+		while(it.hasNext()) {
+			it.next();
+		}
+		
+	}
+	
+	@Test(expected=NoSuchElementException.class)
+	public void testIteratorException() {
+		a.add("abc", 8);
+		a.add("AFR",3);
+		Iterator<String> it = a.iterator();
+		while(true) {
+			it.next();
+		}
+		
+	}
+	
+	@Test(expected=UnsupportedOperationException.class)
+	public void testIteratorException2() {
+		Iterator<String> it = a.iterator();
+		it.remove();
 	}
 
 	@Test
