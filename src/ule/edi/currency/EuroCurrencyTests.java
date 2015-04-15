@@ -10,6 +10,9 @@ import ule.edi.currency.Euro.Denomination;
 
 public class EuroCurrencyTests {
 
+		Euro a = new Euro();
+		
+		Denomination b = new Denomination(1);
 	//	Calcula el valor en Euros de una bolsa
 	
 	private double totalValueInEuros(Bag<Denomination> b) {
@@ -18,8 +21,10 @@ public class EuroCurrencyTests {
 
 		for (Denomination t : Euro.ALL_DENOMINATIONS) {
 			result = result + (t.getValue() * b.count(t));
+			t.hashCode();
+			t.equals(null);
 		}
-
+		
 		return result / 100.0;
 	}
 	
@@ -30,7 +35,7 @@ public class EuroCurrencyTests {
 		Bag<Euro.Denomination> B = new LinkedBagImpl<Euro.Denomination>();
 		
 		//	Añade contenido a la bolsa
-		B.add(Euro.FIVE_HUNDRED_EUROS, 4);
+		B.add(Euro.FIVE_HUNDRED_EUROS, 1);
 		B.add(Euro.TWO_HUNDRED_EUROS, 1);
 		B.add(Euro.TEN_EUROS, 1);
 		B.add(Euro.FIFTY_CENTS, 1);
